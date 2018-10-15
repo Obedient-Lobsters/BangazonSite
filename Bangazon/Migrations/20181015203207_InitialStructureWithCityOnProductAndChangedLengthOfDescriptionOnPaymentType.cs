@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Bangazon.Migrations
 {
-    public partial class InitialStructurePlusAddCityToProductAndChangeLengthOfDescriptionOnPaymentType : Migration
+    public partial class InitialStructureWithCityOnProductAndChangedLengthOfDescriptionOnPaymentType : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -202,7 +202,7 @@ namespace Bangazon.Migrations
                     Title = table.Column<string>(maxLength: 55, nullable: false),
                     Price = table.Column<double>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
-                    City = table.Column<string>(nullable: false),
+                    City = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false),
                     ProductTypeId = table.Column<int>(nullable: false)
                 },
@@ -280,17 +280,17 @@ namespace Bangazon.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "StreetAddress", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "759fb47e-3336-4a74-a7b5-f720e1d632fc", 0, "200ec8fb-c75d-4cb7-ac0f-a93d833e4714", "admin@admin.com", true, "admin", "admin", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEF5kZmZHsEHFgP4PgzeoT7beK6qoc7NZE3ZWvX0QMuCioLfiK3+Gd8RnPWrKnpFT6Q==", null, false, "ba343658-3f9c-4439-af0d-4a4e0513f470", "123 Infinity Way", false, "admin@admin.com" });
+                values: new object[] { "73620e63-2a76-459e-b4a8-d11583f6a42a", 0, "92eacae4-e6e2-4a93-8de2-7cf14f497936", "admin@admin.com", true, "admin", "admin", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAECgSd2DX+vsIQw97BCcpFp78oa9SvtUwp27Y814aImc/njEiBySoSHkTqZWEty5llA==", null, false, "952b2ad1-114e-4789-9351-009e794f59c3", "123 Infinity Way", false, "admin@admin.com" });
 
             migrationBuilder.InsertData(
                 table: "PaymentType",
                 columns: new[] { "PaymentTypeId", "AccountNumber", "DateCreated", "Description", "UserId" },
-                values: new object[] { 1, "86753095551212", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "American Express", "759fb47e-3336-4a74-a7b5-f720e1d632fc" });
+                values: new object[] { 1, "86753095551212", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "American Express", "73620e63-2a76-459e-b4a8-d11583f6a42a" });
 
             migrationBuilder.InsertData(
                 table: "PaymentType",
                 columns: new[] { "PaymentTypeId", "AccountNumber", "DateCreated", "Description", "UserId" },
-                values: new object[] { 2, "4102948572991", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Discover", "759fb47e-3336-4a74-a7b5-f720e1d632fc" });
+                values: new object[] { 2, "4102948572991", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Discover", "73620e63-2a76-459e-b4a8-d11583f6a42a" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
