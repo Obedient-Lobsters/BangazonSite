@@ -26,3 +26,4 @@ if you don't do this you will be
 - [ ] I have made corresponding changes to the documentation
 - [ ] My changes generate no new warnings
 - [ ] I have added test instructions that prove my fix is effective or that my feature works
+- [ ] Run test suite with ```dotnet test``` and making sure all tests are green.
