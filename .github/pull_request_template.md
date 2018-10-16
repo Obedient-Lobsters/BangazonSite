@@ -12,7 +12,6 @@
 git fetch -a
 git checkout (Your branch name here)
 start Bangazon.sln
-cd Bangazon
 
 ```
 
