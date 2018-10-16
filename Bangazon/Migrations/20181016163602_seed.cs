@@ -1,4 +1,7 @@
-﻿using System;
+﻿//Author: Only Will, definitely not a group effor Shu
+//Purpose: Create and seed data to the database
+
+using System;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
