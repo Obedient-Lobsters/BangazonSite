@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Bangazon.Models.OrderViewModels
+namespace Bangazon.Models.ProductTypeViewModels
 {
     public class OrderDetailViewModel
     {
