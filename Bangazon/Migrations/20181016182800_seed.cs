@@ -1,7 +1,4 @@
-﻿//Author: Only Will, definitely not a group effor Shu
-//Purpose: Create and seed data to the database
-
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
@@ -285,10 +282,10 @@ namespace Bangazon.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "StreetAddress", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "b2d2b9b6-5720-4145-8080-f6ae3db92fbd", 0, "76a8cec7-30fd-4cce-97a2-30f3798fe915", "admin@admin.com", true, "admin", "admin", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEMp+QYiig+Q4tifuqZVgsUaSWKekYypoiexQEKohlOG7gTNdt2YfsUIPZNxafzbKQw==", null, false, "d5765b1b-c951-43e0-8a7e-5c132ebdb030", "123 Infinity Way", false, "admin@admin.com" },
-                    { "3a034b12-505c-4a2f-a859-58c78c5d154f", 0, "8a74fabd-34f6-423c-a913-24f3ae7a5d24", "test@test.com", true, "Test", "Smith", false, null, "TEST@TEST.COM", "TEST@TEST.COM", "AQAAAAEAACcQAAAAEN9Hl4SI9KFyjzHr/GLYYBk/gE8C+sy2587vLcOLX/1wT1CcvZ5ztt/rrNIP0K9K2A==", null, false, "8e460a8c-01eb-49cc-aa63-b57915d50bfc", "123 Main Way", false, "test@test.com" },
-                    { "1aa3bae6-c8ef-4711-8367-bc8353e3065b", 0, "9c06cf1b-6404-40ac-9c63-33bd81877cce", "ron@test.com", true, "Ronaldo", "McDonaldo", false, null, "RON@TEST.COM", "RON@TEST.COM", "AQAAAAEAACcQAAAAEBYCz4JkE2iDS33P57JJ1t9pBhZLEBCfvu2/s6P8Bs85SdMJB2VN/S67yoXQuN6qxA==", null, false, "cefdd1d9-1ae0-4284-88ed-811c57e6174f", "456 Long Street", false, "ron@test.com" },
-                    { "8439f874-ac03-47c9-b091-ed2202df8333", 0, "66394188-efbe-4dc4-b4bd-ee7b740dceea", "lj@test.com", true, "Lauren-Jane", "Belle", false, null, "LJ@TEST.COM", "LJ@TEST.COM", "AQAAAAEAACcQAAAAEEc24qxmBvB3dl//0yoN3GiCrdqJx6ALm6ba/W9NP3EcVZACI7nMfxXrJXWeVutSZg==", null, false, "573efced-1da7-43d4-840b-f334287cb0dc", "789 Robert E. Lee Blvd.", false, "lj@test.com" }
+                    { "9dbca40e-64b8-45c4-a6e1-aaadf63e21b6", 0, "4c6fee06-b406-4d75-9ce5-83c5de701b68", "admin@admin.com", true, "admin", "admin", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEBXnrHnC/DNUpj+sHuuJJnf36+Jvzy5ofkyC9XHWGTNsGHbqbbpZTNKyYZRXn/NePg==", null, false, "09f3f967-a7ba-4a9b-b86f-9d2e0318790d", "123 Infinity Way", false, "admin@admin.com" },
+                    { "eedadbc9-acb8-4612-b948-a2eeaf73ee1a", 0, "2f5cf1cc-2770-4901-b413-25aa8cce7c68", "test@test.com", true, "Test", "Smith", false, null, "TEST@TEST.COM", "TEST@TEST.COM", "AQAAAAEAACcQAAAAEHYpLB3sq/5VOFwEvD3+Mp6r0pTmPlqgjsEMOpmtPsLyEJnEgSGl+OBd6usWKGuhhw==", null, false, "4faf41fc-9493-4f37-9492-09a03003c427", "123 Main Way", false, "test@test.com" },
+                    { "46f35a2f-c6ed-46f9-aa27-c01398343051", 0, "e68a82cf-917c-4e5c-989c-26c1aa58c389", "ron@test.com", true, "Ronaldo", "McDonaldo", false, null, "RON@TEST.COM", "RON@TEST.COM", "AQAAAAEAACcQAAAAEDfoAI+tbb8WJI20ZWRZPlZpH9KuxtjyARcbKXOa32dFCtOT0xciR9/fQ4neY8wI+w==", null, false, "9d0165b4-7d71-4b25-b5bf-601b5fcf97dd", "456 Long Street", false, "ron@test.com" },
+                    { "2d47849c-4efe-4547-b3e6-2e22266a8472", 0, "89a29798-e05b-428d-ae9c-227d2d2a1326", "lj@test.com", true, "Lauren-Jane", "Belle", false, null, "LJ@TEST.COM", "LJ@TEST.COM", "AQAAAAEAACcQAAAAEGxP7fzaMazPl9mQBcslcLK64Tcj5mCYZR1EglZFxO02nGZSiYi8zs4G5UCLYecRdQ==", null, false, "0d32877b-b3c3-4573-868a-4f7e5ab3d3d5", "789 Robert E. Lee Blvd.", false, "lj@test.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -308,18 +305,18 @@ namespace Bangazon.Migrations
             migrationBuilder.InsertData(
                 table: "Order",
                 columns: new[] { "OrderId", "DateCompleted", "DateCreated", "PaymentTypeId", "UserId" },
-                values: new object[] { 2, null, new DateTime(2018, 10, 16, 11, 36, 1, 491, DateTimeKind.Local), null, "b2d2b9b6-5720-4145-8080-f6ae3db92fbd" });
+                values: new object[] { 2, null, new DateTime(2018, 10, 16, 13, 28, 0, 144, DateTimeKind.Local), null, "9dbca40e-64b8-45c4-a6e1-aaadf63e21b6" });
 
             migrationBuilder.InsertData(
                 table: "PaymentType",
                 columns: new[] { "PaymentTypeId", "AccountNumber", "DateCreated", "Description", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "86753095551212", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "American Express", "b2d2b9b6-5720-4145-8080-f6ae3db92fbd" },
-                    { 2, "4102948572991", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Discover", "b2d2b9b6-5720-4145-8080-f6ae3db92fbd" },
-                    { 3, "6469382038410084", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "American Express", "3a034b12-505c-4a2f-a859-58c78c5d154f" },
-                    { 4, "9650917385012", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Discover", "3a034b12-505c-4a2f-a859-58c78c5d154f" },
-                    { 5, "12345678910", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Discover", "1aa3bae6-c8ef-4711-8367-bc8353e3065b" }
+                    { 1, "86753095551212", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "American Express", "9dbca40e-64b8-45c4-a6e1-aaadf63e21b6" },
+                    { 2, "4102948572991", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Discover", "9dbca40e-64b8-45c4-a6e1-aaadf63e21b6" },
+                    { 3, "6469382038410084", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "American Express", "eedadbc9-acb8-4612-b948-a2eeaf73ee1a" },
+                    { 4, "9650917385012", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Discover", "eedadbc9-acb8-4612-b948-a2eeaf73ee1a" },
+                    { 5, "12345678910", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Discover", "46f35a2f-c6ed-46f9-aa27-c01398343051" }
                 });
 
             migrationBuilder.InsertData(
@@ -327,33 +324,38 @@ namespace Bangazon.Migrations
                 columns: new[] { "ProductId", "City", "DateCreated", "Description", "Price", "ProductTypeId", "Quantity", "Title", "UserId" },
                 values: new object[,]
                 {
-                    { 9, "Fremont", new DateTime(2018, 10, 16, 11, 36, 1, 491, DateTimeKind.Local), "Ride the Lightning", 35000.0, 5, 50000, "Tesla Model 3", "b2d2b9b6-5720-4145-8080-f6ae3db92fbd" },
-                    { 15, "", new DateTime(2018, 10, 16, 11, 36, 1, 491, DateTimeKind.Local), "You'll loose a dart immediately", 27.99, 4, 18, "Nerf Gun", "b2d2b9b6-5720-4145-8080-f6ae3db92fbd" },
-                    { 14, "Nashville", new DateTime(2018, 10, 16, 11, 36, 1, 491, DateTimeKind.Local), "What a lumpy couple", 55.99, 4, 65, "Mr. & Mrs. Potato Head Anniversary Set", "1aa3bae6-c8ef-4711-8367-bc8353e3065b" },
-                    { 12, "Asgard", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Only one who is worth may wield me.", 115.99, 4, 1, "Mjolnir", "b2d2b9b6-5720-4145-8080-f6ae3db92fbd" },
-                    { 8, "Mos Eisley", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A more elegant weapon from a more civilized time", 2317.03, 4, 1, "Light Saber", "1aa3bae6-c8ef-4711-8367-bc8353e3065b" },
-                    { 16, "Birnin Zana", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "SpinZ forever", 67.99, 3, 42, "Vibranium Fidget Spinner", "1aa3bae6-c8ef-4711-8367-bc8353e3065b" },
-                    { 7, "", new DateTime(2018, 10, 16, 11, 36, 1, 491, DateTimeKind.Local), "The source of infinite programming knowledge", 7.99, 3, 26, "Rubber Duck", "8439f874-ac03-47c9-b091-ed2202df8333" },
-                    { 21, "", new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeKind.Unspecified), "Heeeeeere's Johnny.", 8.99, 2, 1, "The Shining", "b2d2b9b6-5720-4145-8080-f6ae3db92fbd" },
-                    { 20, "", new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeKind.Unspecified), "A mormon author representing diversity (but then he changed his mind?).", 6.99, 2, 14, "Ender's Game", "b2d2b9b6-5720-4145-8080-f6ae3db92fbd" },
-                    { 17, "", new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeKind.Unspecified), "Using words to talk of words is like using a pencil to draw a picture of itself, on itself.", 25.99, 2, 1, "The Doors of Stone", "1aa3bae6-c8ef-4711-8367-bc8353e3065b" },
-                    { 18, "Nashville", new DateTime(2018, 10, 16, 11, 36, 1, 491, DateTimeKind.Local), "The greatest hook of any book, so take a look and you'll be shook.", 21.99, 2, 4, "The Rook", "1aa3bae6-c8ef-4711-8367-bc8353e3065b" },
-                    { 13, "Liverpool", new DateTime(2018, 10, 16, 11, 36, 1, 491, DateTimeKind.Local), "We all live in it", 1235.99, 5, 1, "Yellow Submarine", "8439f874-ac03-47c9-b091-ed2202df8333" },
-                    { 11, "", new DateTime(2018, 10, 16, 11, 36, 1, 491, DateTimeKind.Local), "A large pile of ash", 15.99, 2, 10, "Harry Potter and the Chamber of Secrets", "1aa3bae6-c8ef-4711-8367-bc8353e3065b" },
-                    { 5, "Seoul", new DateTime(2018, 10, 16, 11, 36, 1, 491, DateTimeKind.Local), "'Yer a wizard Harry'", 15.99, 2, 1, "Harry Potter and the Philospher's Stone", "1aa3bae6-c8ef-4711-8367-bc8353e3065b" },
-                    { 10, "", new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeKind.Unspecified), "Greatest game never made", 29.99, 1, 12, "HalfLife 3", "b2d2b9b6-5720-4145-8080-f6ae3db92fbd" },
-                    { 4, "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A camera that has no mirrors.", 2418.0, 1, 7, "Sony Alpha 7-111", "8439f874-ac03-47c9-b091-ed2202df8333" },
-                    { 3, "Nashville", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "It's a light bulb, but smart.", 20.99, 1, 46, "Smart Light", "b2d2b9b6-5720-4145-8080-f6ae3db92fbd" },
-                    { 2, "Nashville", new DateTime(2018, 10, 16, 11, 36, 1, 489, DateTimeKind.Local), "The ULTIMATE gaming machine", 499.99, 1, 34, "Nintendo XPlayStation 7201", "8439f874-ac03-47c9-b091-ed2202df8333" },
-                    { 1, "Seoul", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "65 Inch OLED Curved 3d VR SmartTV", 9999.0, 1, 1, "Samsung TV", "1aa3bae6-c8ef-4711-8367-bc8353e3065b" },
-                    { 19, "Nashville", new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeKind.Unspecified), "The call of Cthulu. Nameless horrors of elder gods and unspeakable blasphemies. (Bound in Human skin!)", 25.99, 2, 1, "The Necronomicon", "1aa3bae6-c8ef-4711-8367-bc8353e3065b" },
-                    { 6, "Camelot", new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeKind.Unspecified), "Turns lead into gold and grants immortality. Also kinda ugly", 3.53, 7, 1, "The OG Philospher's Stone", "b2d2b9b6-5720-4145-8080-f6ae3db92fbd" }
+                    { 9, "Fremont", new DateTime(2018, 10, 16, 13, 28, 0, 144, DateTimeKind.Local), "Ride the Lightning", 35000.0, 5, 50000, "Tesla Model 3", "9dbca40e-64b8-45c4-a6e1-aaadf63e21b6" },
+                    { 15, "", new DateTime(2018, 10, 16, 13, 28, 0, 144, DateTimeKind.Local), "You'll loose a dart immediately", 27.99, 4, 18, "Nerf Gun", "9dbca40e-64b8-45c4-a6e1-aaadf63e21b6" },
+                    { 14, "Nashville", new DateTime(2018, 10, 16, 13, 28, 0, 144, DateTimeKind.Local), "What a lumpy couple", 55.99, 4, 65, "Mr. & Mrs. Potato Head Anniversary Set", "46f35a2f-c6ed-46f9-aa27-c01398343051" },
+                    { 12, "Asgard", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Only one who is worth may wield me.", 115.99, 4, 1, "Mjolnir", "9dbca40e-64b8-45c4-a6e1-aaadf63e21b6" },
+                    { 8, "Mos Eisley", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A more elegant weapon from a more civilized time", 2317.03, 4, 1, "Light Saber", "46f35a2f-c6ed-46f9-aa27-c01398343051" },
+                    { 16, "Birnin Zana", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "SpinZ forever", 67.99, 3, 42, "Vibranium Fidget Spinner", "46f35a2f-c6ed-46f9-aa27-c01398343051" },
+                    { 7, "", new DateTime(2018, 10, 16, 13, 28, 0, 144, DateTimeKind.Local), "The source of infinite programming knowledge", 7.99, 3, 26, "Rubber Duck", "2d47849c-4efe-4547-b3e6-2e22266a8472" },
+                    { 21, "", new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeKind.Unspecified), "Heeeeeere's Johnny.", 8.99, 2, 1, "The Shining", "9dbca40e-64b8-45c4-a6e1-aaadf63e21b6" },
+                    { 20, "", new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeKind.Unspecified), "A mormon author representing diversity (but then he changed his mind?).", 6.99, 2, 14, "Ender's Game", "9dbca40e-64b8-45c4-a6e1-aaadf63e21b6" },
+                    { 17, "", new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeKind.Unspecified), "Using words to talk of words is like using a pencil to draw a picture of itself, on itself.", 25.99, 2, 1, "The Doors of Stone", "46f35a2f-c6ed-46f9-aa27-c01398343051" },
+                    { 18, "Nashville", new DateTime(2018, 10, 16, 13, 28, 0, 144, DateTimeKind.Local), "The greatest hook of any book, so take a look and you'll be shook.", 21.99, 2, 4, "The Rook", "46f35a2f-c6ed-46f9-aa27-c01398343051" },
+                    { 13, "Liverpool", new DateTime(2018, 10, 16, 13, 28, 0, 144, DateTimeKind.Local), "We all live in it", 1235.99, 5, 1, "Yellow Submarine", "2d47849c-4efe-4547-b3e6-2e22266a8472" },
+                    { 11, "", new DateTime(2018, 10, 16, 13, 28, 0, 144, DateTimeKind.Local), "A large pile of ash", 15.99, 2, 10, "Harry Potter and the Chamber of Secrets", "46f35a2f-c6ed-46f9-aa27-c01398343051" },
+                    { 5, "Seoul", new DateTime(2018, 10, 16, 13, 28, 0, 144, DateTimeKind.Local), "'Yer a wizard Harry'", 15.99, 2, 1, "Harry Potter and the Philospher's Stone", "46f35a2f-c6ed-46f9-aa27-c01398343051" },
+                    { 10, "", new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeKind.Unspecified), "Greatest game never made", 29.99, 1, 12, "HalfLife 3", "9dbca40e-64b8-45c4-a6e1-aaadf63e21b6" },
+                    { 4, "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A camera that has no mirrors.", 2418.0, 1, 7, "Sony Alpha 7-111", "2d47849c-4efe-4547-b3e6-2e22266a8472" },
+                    { 3, "Nashville", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "It's a light bulb, but smart.", 20.99, 1, 46, "Smart Light", "9dbca40e-64b8-45c4-a6e1-aaadf63e21b6" },
+                    { 2, "Nashville", new DateTime(2018, 10, 16, 13, 28, 0, 142, DateTimeKind.Local), "The ULTIMATE gaming machine", 499.99, 1, 34, "Nintendo XPlayStation 7201", "2d47849c-4efe-4547-b3e6-2e22266a8472" },
+                    { 1, "Seoul", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "65 Inch OLED Curved 3d VR SmartTV", 9999.0, 1, 1, "Samsung TV", "46f35a2f-c6ed-46f9-aa27-c01398343051" },
+                    { 19, "Nashville", new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeKind.Unspecified), "The call of Cthulu. Nameless horrors of elder gods and unspeakable blasphemies. (Bound in Human skin!)", 25.99, 2, 1, "The Necronomicon", "46f35a2f-c6ed-46f9-aa27-c01398343051" },
+                    { 6, "Camelot", new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeKind.Unspecified), "Turns lead into gold and grants immortality. Also kinda ugly", 3.53, 7, 1, "The OG Philospher's Stone", "9dbca40e-64b8-45c4-a6e1-aaadf63e21b6" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Order",
                 columns: new[] { "OrderId", "DateCompleted", "DateCreated", "PaymentTypeId", "UserId" },
-                values: new object[] { 1, new DateTime(2018, 10, 16, 11, 36, 1, 491, DateTimeKind.Local), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "b2d2b9b6-5720-4145-8080-f6ae3db92fbd" });
+                values: new object[] { 1, new DateTime(2018, 10, 16, 13, 28, 0, 144, DateTimeKind.Local), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "9dbca40e-64b8-45c4-a6e1-aaadf63e21b6" });
+
+            migrationBuilder.InsertData(
+                table: "OrderProduct",
+                columns: new[] { "OrderProductId", "OrderId", "ProductId" },
+                values: new object[] { 1, 1, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

@@ -456,6 +456,20 @@ namespace Bangazon.Data {
                     PaymentTypeId = null,
                     UserId = user.Id
                 });
+            modelBuilder.Entity<OrderProduct>().HasData(
+                new OrderProduct()
+                {
+                    OrderProductId = 1,
+                    ProductId = 1,
+                    OrderId = 1
+                }
+                );
+                new OrderProduct()
+                {
+                    OrderProductId = 2,
+                    ProductId = 16,
+                    OrderId = 1
+                };
         }
     }
 }
