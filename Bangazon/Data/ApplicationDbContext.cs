@@ -453,6 +453,7 @@ namespace Bangazon.Data {
                 {
                     OrderId = 2,
                     DateCreated = DateTime.Now,
+                    PaymentTypeId = null,
                     UserId = user.Id
                 });
         }
