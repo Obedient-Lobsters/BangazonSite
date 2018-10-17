@@ -1,0 +1,39 @@
+﻿@model Bangazon.Models.ProductTypesViewModel
+
+@{
+    ViewData["Title"] = "Product Types";
+}
+
+<h2>Product Types</h2>
+
+<table class="table">
+
+    @*<thead>
+        @foreach (var item in Model)
+        {
+                <tr>
+                    <a>
+                        @Html.DisplayFor(modelItem => item.Label)
+                    </a>
+                </tr>
+        }
+            </thead>*@
+    <tbody>
+        @foreach (var item in Model.GroupedProducts)
+        {
+            <tr>
+                <th>
+                    <a asp-action="Details" asp-route-id="@item">
+                        <h4>@item.TypeName (@item.ProductCount)</h4>
+                    </a>
+                </th>
+                @foreach (var product in item.Products)
+                {
+                    <tr>
+                <td>@product.Title</td><td>$@product.Price</td>
+                    </tr>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

@@ -4,9 +4,9 @@ namespace Bangazon.Models
 {
     public class ProductTypesViewModel
     {
-        public ProductType ProductType { get; set; }
+        //public ProductType ProductType { get; set; }
 
-        public List<GroupedProducts> GroupedProducts { get; set; }
+        public IEnumerable<GroupedProducts> GroupedProducts { get; set; }
 
         //public IEnumerable<ProductLineItem> LineItems { get; set; }
     }
