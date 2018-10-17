@@ -27,7 +27,7 @@
                         <h4>@item.TypeName (@item.ProductCount)</h4>
                     </a>
                 </th>
-                @foreach (var product in item.Products)
+                @foreach (var product in item.Products.Take(3))
                 {
                     <tr>
                 <td>@product.Title</td><td>$@product.Price</td>
