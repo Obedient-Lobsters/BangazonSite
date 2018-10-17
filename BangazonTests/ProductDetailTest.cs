@@ -8,12 +8,9 @@ using Xunit;
 
 namespace BangazonTests
 {
-	/*
-	class ProductDetailTest
-	{
-	}
-	*/
 
+	// Author: Elliot Huck
+	// Description: Tests whether a product details page returns the correct content
 	public class ProductDetailTest : IClassFixture<WebApplicationFactory<Bangazon.Startup>>
 	{
 		private readonly WebApplicationFactory<Bangazon.Startup> _factory;
@@ -40,6 +37,8 @@ namespace BangazonTests
 		}
 
 		/*
+		 I may need this code later when testing if the Add to Order button actually posts a product to an order
+
 		[Fact]
 		public async Task Post_DeleteAllMessagesHandler_ReturnsRedirectToRoot()
 		{
