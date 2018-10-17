@@ -27,6 +27,14 @@ namespace Bangazon.Controllers
         }
 
         // GET: Products/Details/5
+		// Author: Elliot Huck
+		/* Description: 
+		 * Whenever a link with a product name is clicked, the details page shows more info on the product.
+		 * It also queries the database to see how many are still available for sale and displays an 'Add to Order' button that will eventually
+		 * allow a user to add the product to an order.
+		 * If there are no more remaining, the 'Add' button should be disabled.
+		 * Also, the 'Add' button should only function for registered users.
+		*/ 
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -41,6 +49,12 @@ namespace Bangazon.Controllers
             {
                 return NotFound();
             }
+
+			// Gets the number of intersections of this product on the OrderProduct table, showing how many times this product has been added to an order
+			int numOrdered = _context.OrderProduct.Where(op => op.ProductId == product.ProductId).Count();
+
+			// Decreases the quantity of the product available by the number that has already been ordered
+			product.Quantity -= numOrdered;
 
             return View(product);
         }
