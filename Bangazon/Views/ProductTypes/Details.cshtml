@@ -4,17 +4,48 @@
     ViewData["Title"] = "Product Detail";
 }
 
-<h2 class="top-buffer">@Model.ProductType.Label</h2>
+<div>
+    <h2 class="top-buffer">@Model.ProductTypes.Label</h2>
+    <hr />
 
-@foreach (var product in Model.Products)
-{
-    <div class="row">
-        <div class="col-md-3">
-            <a asp-controller="Products" asp-action="Detail" asp-route-id="@product.ProductId">
-                @Html.DisplayFor(modelItem => product.Title)
-            </a>
-        </div>
-        <div class="col-md-7">@product.Quantity</div>
-        <div class="col-md-2">@Html.DisplayFor(i => product.Price)</div>
-    </div>
-}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Price
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Products" asp-action="Detail" asp-route-id="@product.ProductId">
+                            @Html.DisplayFor(modelItem => product.Title)
+                        </a>
+                    </td>
+                    <td>
+                        @product.Quantity
+                    </td>
+                    <td>
+                        @Html.DisplayFor(i => product.Price)
+                    </td>
+                    <td>
+                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    @*<a asp-action="Index">Back to List</a>*@
+</div>

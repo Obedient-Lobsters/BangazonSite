@@ -7,7 +7,7 @@ namespace Bangazon.Models.ProductViewModels
 {
     public class ProductTypeDetailViewModel
     {
-        public ProductType ProductType { get; set; }
+        public ProductType ProductTypes { get; set; }
         public virtual List<Product> Products { get; set; }
     }
 }

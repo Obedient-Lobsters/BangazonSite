@@ -26,11 +26,11 @@ namespace Bangazon.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Detail([FromRoute]int? type)
+        public async Task<IActionResult> Details([FromRoute]int? id)
         {
 
             // If no id was in the route, return 404
-            if (type == null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -38,7 +38,7 @@ namespace Bangazon.Controllers
             var model = new ProductTypeDetailViewModel();
 
             var productType = await context.ProductType
-                                .Where(t => t.ProductTypeId == type)
+                                .Where(t => t.ProductTypeId == id)
                                 .SingleOrDefaultAsync();
 
             // If product not found, return 404
@@ -48,10 +48,10 @@ namespace Bangazon.Controllers
             }
 
             model.Products = await (from t in context.Product
-                                    where t.ProductTypeId == type
+                                    where t.ProductTypeId == id
                                     select t).ToListAsync();
 
-            model.ProductType = productType;
+            model.ProductTypes = productType;
 
             return View(model);
         }
