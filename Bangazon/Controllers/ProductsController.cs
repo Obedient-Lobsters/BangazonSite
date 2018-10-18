@@ -6,15 +6,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bangazon.Models;
-
+using Bangazon.Data;
 
 namespace Bangazon.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly BangazonContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public ProductsController(BangazonContext context)
+        public ProductsController(ApplicationDbContext context)
         {
             _context = context;
         }

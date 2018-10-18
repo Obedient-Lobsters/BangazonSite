@@ -40,7 +40,7 @@ namespace Bangazon {
 
             services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_1);
 
-    services.AddDbContext<BangazonContext>(options =>
+    services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
