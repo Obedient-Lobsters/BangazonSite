@@ -1,4 +1,5 @@
-namespace Bangazon.Models.ProductTypeViewModels {
+namespace Bangazon.Models.OrderViewModels
+{
     public class OrderLineItem {
         public Product Product { get; set; }
         public int Units { get; set; }
