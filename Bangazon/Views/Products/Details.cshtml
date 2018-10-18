@@ -1,0 +1,36 @@
+﻿@*
+    Author: Elliot Huck
+    Description: Shows the details of an individual product and displays a button for the user to add the product to their order
+*@
+
+@model Bangazon.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>@Html.DisplayFor(model => model.Title) &ndash; @Html.DisplayFor(model => model.Price) </h2>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.Description)</h4>
+    <hr />
+
+    <h4>@Html.DisplayFor(model => model.Quantity) remaining!</h4>
+
+    @*
+        The line below makes a link that is styled like a button.
+        There is a ternary statement inside the "class" attribute that checks if the quantity is greater than 0. 
+        If so, it gives the button a primary color by adding the Bootstrap btn-primary class. 
+        If there are no more available for sale, it makes the button grayed out and not clickable by adding the btn-default and disabled Bootstrap classes
+    *@
+    <a asp-action="" asp-route-id="@Model.ProductId" class="btn @(Model.Quantity > 0 ? "btn-primary" : "btn-default disabled")">Add to Order</a>
+
+</div>
+
+<br/>
+
+<div>
+    <a asp-action="Index">&lt;&lt; Back to List</a>
+</div>
+
+
