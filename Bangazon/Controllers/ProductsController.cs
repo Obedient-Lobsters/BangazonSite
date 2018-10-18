@@ -7,22 +7,29 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bangazon.Data;
 using Bangazon.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace Bangazon.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+		private readonly ApplicationDbContext _context;
 
-        public ProductsController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+		private readonly UserManager<ApplicationUser> _userManager;
+
+		public ProductsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+		{
+			_context = context;
+			_userManager = userManager;
+		}
+
+		private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
 		// This Index() method is currently being used by the ProductDetails view as a redirect when the "Add To Order" button is clicked.
 		// Once order functionality has been built and the Home page has been merged, this method and its view will be obsolete and can be deprecated
-        // GET: Products
-        public async Task<IActionResult> Index()
+		// GET: Products
+		public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Product.Include(p => p.ProductType);
             return View(await applicationDbContext.ToListAsync());
@@ -60,6 +67,25 @@ namespace Bangazon.Controllers
 
             return View(product);
         }
+
+		[Authorize]
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> AddToOrder(Product product)
+		{
+			ApplicationUser currentUser = await GetCurrentUserAsync();
+
+			Order activeOrder = await _context.Order.Where(o => (o.UserId == currentUser.Id) && (o.PaymentTypeId == null)).FirstOrDefaultAsync();
+
+			if (ModelState.IsValid)
+			{
+				_context.Add(product);
+				await _context.SaveChangesAsync();
+				return RedirectToAction(nameof(Index));
+			}
+			ViewData["ProductTypeId"] = new SelectList(_context.ProductType, "ProductTypeId", "Label", product.ProductTypeId);
+			return View(product);
+		}
 
 		// These Create() methods are commented out because they were built by scaffolding, but aren't being implemented yet.
 		// I'm leaving them in here because they may be useful for someone working on a different ticket in the future --Elliot
