@@ -1,4 +1,6 @@
-﻿@model Bangazon.Models.ProductTypesViewModel
+﻿@*Author: William Kimball*@
+@*Purpose: build a view model for product type index*@
+@model Bangazon.Models.ProductTypesViewModel
 
 @{
     ViewData["Title"] = "Product Types";
@@ -8,16 +10,6 @@
 
 <table class="table">
 
-    @*<thead>
-        @foreach (var item in Model)
-        {
-                <tr>
-                    <a>
-                        @Html.DisplayFor(modelItem => item.Label)
-                    </a>
-                </tr>
-        }
-            </thead>*@
     <tbody>
         @foreach (var item in Model.GroupedProducts)
         {

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bangazon.Models;
-using Bangazon.Models.ProductTypeViewModels;
+
 
 namespace Bangazon.Controllers
 {
