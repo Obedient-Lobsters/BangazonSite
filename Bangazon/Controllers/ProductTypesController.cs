@@ -2,152 +2,64 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bangazon.Models;
+using Bangazon.Data;
+using Bangazon.Models.ProductViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Bangazon.Data;
-using Bangazon.Models;
 
 namespace Bangazon.Controllers
 {
     public class ProductTypesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private ApplicationDbContext context;
 
-        public ProductTypesController(ApplicationDbContext context)
+        public ProductTypesController(ApplicationDbContext ctx)
         {
-            _context = context;
+            context = ctx;
         }
 
-        // GET: ProductTypes
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.ProductType.ToListAsync());
-        }
 
-        // GET: ProductTypes/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var productType = await _context.ProductType
-                .FirstOrDefaultAsync(m => m.ProductTypeId == id);
-            if (productType == null)
-            {
-                return NotFound();
-            }
-
-            return View(productType);
-        }
-
-        // GET: ProductTypes/Create
-        public IActionResult Create()
-        {
             return View();
         }
 
-        // POST: ProductTypes/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductTypeId,Label")] ProductType productType)
+        public async Task<IActionResult> Detail([FromRoute]int? type)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(productType);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(productType);
-        }
 
-        // GET: ProductTypes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
+            // If no id was in the route, return 404
+            if (type == null)
             {
                 return NotFound();
             }
 
-            var productType = await _context.ProductType.FindAsync(id);
-            if (productType == null)
-            {
-                return NotFound();
-            }
-            return View(productType);
-        }
+            var model = new ProductTypeDetailViewModel();
 
-        // POST: ProductTypes/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductTypeId,Label")] ProductType productType)
-        {
-            if (id != productType.ProductTypeId)
-            {
-                return NotFound();
-            }
+            var productType = await context.ProductType
+                                .Where(t => t.ProductTypeId == type)
+                                .SingleOrDefaultAsync();
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(productType);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductTypeExists(productType.ProductTypeId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(productType);
-        }
-
-        // GET: ProductTypes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var productType = await _context.ProductType
-                .FirstOrDefaultAsync(m => m.ProductTypeId == id);
+            // If product not found, return 404
             if (productType == null)
             {
                 return NotFound();
             }
 
-            return View(productType);
+            model.Products = await (from t in context.Product
+                                    where t.ProductTypeId == type
+                                    select t).ToListAsync();
+
+            model.ProductType = productType;
+
+            return View(model);
         }
 
-        // POST: ProductTypes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpGet]
+        public IActionResult Create()
         {
-            var productType = await _context.ProductType.FindAsync(id);
-            _context.ProductType.Remove(productType);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool ProductTypeExists(int id)
-        {
-            return _context.ProductType.Any(e => e.ProductTypeId == id);
+            return View();
         }
     }
 }
