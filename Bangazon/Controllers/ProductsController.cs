@@ -21,6 +21,9 @@ namespace Bangazon.Controllers
 
 		// This Index() method is currently being used by the ProductDetails view as a redirect when the "Add To Order" button is clicked.
 		// Once order functionality has been built and the Home page has been merged, this method and its view will be obsolete and can be deprecated
+        //Author: Shu Sajid
+        //Purpose: I am changing Elliots index that was used for Product Details testing
+        //a repurposing for product search
         // GET: Products
         public async Task<IActionResult> Index()
         {
