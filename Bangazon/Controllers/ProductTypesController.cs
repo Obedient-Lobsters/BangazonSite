@@ -26,6 +26,8 @@ namespace Bangazon.Controllers
             return View();
         }
 
+        //Author: Aaron Miller
+        //Purpose: This will call database when category product is clicked and display all products in that cateory with the title, quanity, and price of the products displayed
         public async Task<IActionResult> Details([FromRoute]int? id)
         {
 
