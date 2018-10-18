@@ -25,9 +25,13 @@ namespace Bangazon.Controllers
         //Purpose: I am changing Elliots index that was used for Product Details testing
         //a repurposing for product search
         // GET: Products
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             var applicationDbContext = _context.Product.Include(p => p.ProductType);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                applicationDbContext = applicationDbContext.Select(s => s.Title.Contains(searchString));
+            }
             return View(await applicationDbContext.ToListAsync());
         }
 
