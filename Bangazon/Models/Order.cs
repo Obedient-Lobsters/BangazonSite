@@ -21,6 +21,9 @@ namespace Bangazon.Models
 
     public virtual ApplicationUser User { get; set; }
 
+    [Required]
+    public string UserId { get; set; }
+
     public int? PaymentTypeId {get;set;}
     public PaymentType PaymentType {get;set;}
 
