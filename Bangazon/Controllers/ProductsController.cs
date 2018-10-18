@@ -19,6 +19,8 @@ namespace Bangazon.Controllers
             _context = context;
         }
 
+		// This Index() method is currently being used by the ProductDetails view as a redirect when the "Add To Order" button is clicked.
+		// Once order functionality has been built and the Home page has been merged, this method and its view will be obsolete and can be deprecated
         // GET: Products
         public async Task<IActionResult> Index()
         {
@@ -59,7 +61,10 @@ namespace Bangazon.Controllers
             return View(product);
         }
 
-        // GET: Products/Create
+		// These Create() methods are commented out because they were built by scaffolding, but aren't being implemented yet.
+		// I'm leaving them in here because they may be useful for someone working on a different ticket in the future --Elliot
+		/*
+		// GET: Products/Create
         public IActionResult Create()
         {
             ViewData["ProductTypeId"] = new SelectList(_context.ProductType, "ProductTypeId", "Label");
@@ -82,9 +87,13 @@ namespace Bangazon.Controllers
             ViewData["ProductTypeId"] = new SelectList(_context.ProductType, "ProductTypeId", "Label", product.ProductTypeId);
             return View(product);
         }
+		*/
 
-        // GET: Products/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+		// These Edit() methods are commented out because they were built by scaffolding, but aren't being implemented yet.
+		// I'm leaving them in here because they may be useful for someone working on a different ticket in the future --Elliot
+		/*
+		// GET: Products/Edit/5
+		public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -135,9 +144,13 @@ namespace Bangazon.Controllers
             ViewData["ProductTypeId"] = new SelectList(_context.ProductType, "ProductTypeId", "Label", product.ProductTypeId);
             return View(product);
         }
+		*/
 
-        // GET: Products/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+		// These Delete() methods are commented out because they were built by scaffolding, but aren't being implemented yet.
+		// I'm leaving them in here because they may be useful for someone working on a different ticket in the future --Elliot
+		/*
+		// GET: Products/Delete/5
+		public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -165,10 +178,12 @@ namespace Bangazon.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+		*/
 
-        private bool ProductExists(int id)
+		private bool ProductExists(int id)
         {
             return _context.Product.Any(e => e.ProductId == id);
         }
+		
     }
 }
