@@ -32,6 +32,7 @@ It lists the newest 20 products in descending order*@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            @*This line hyperlinks on product title to product details*@
             <td>
                 <a asp-controller="Products" asp-action="Details" asp-route-id="@item.ProductId">@Html.DisplayFor(modelItem => item.Title)</a>
             </td>
