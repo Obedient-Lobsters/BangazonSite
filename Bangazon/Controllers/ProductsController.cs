@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bangazon.Data;
 using Bangazon.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bangazon.Controllers
 {
@@ -19,20 +20,32 @@ namespace Bangazon.Controllers
             _context = context;
         }
 
-		// This Index() method is currently being used by the ProductDetails view as a redirect when the "Add To Order" button is clicked.
-		// Once order functionality has been built and the Home page has been merged, this method and its view will be obsolete and can be deprecated
-        //Author: Shu Sajid
-        //Purpose: I am changing Elliots index that was used for Product Details testing
-        //a repurposing for product search
-        // GET: Products
-        public async Task<IActionResult> Index(string searchString)
+        // This Index() method is currently being used by the ProductDetails view as a redirect when the "Add To Order" button is clicked.
+        // Once order functionality has been built and the Home page has been merged, this method and its view will be obsolete and can be deprecated
+        public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Product.Include(p => p.ProductType);
+            var products = _context.Product.Include(p => p.ProductType);
+
+            return View(await products.ToListAsync());
+        }
+
+        //Author: Shu Sajid
+        //Purpose: Overloading index method. HttpPost is required because search field on view is
+        // a form. Conditional statment is used if user uses se
+        // GET: Products
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Index(string searchString, bool notUsed)
+        {
+            var products = _context.Product.Include(p => p.ProductType);
+
+
             if (!String.IsNullOrEmpty(searchString))
             {
-                applicationDbContext = applicationDbContext.Select(s => s.Title.Contains(searchString));
+                var searchProducts = products.Where(s => s.Title.Contains(searchString));
+                return View(await searchProducts.ToListAsync());
             }
-            return View(await applicationDbContext.ToListAsync());
+            return View(await products.ToListAsync());
         }
 
         // GET: Products/Details/5

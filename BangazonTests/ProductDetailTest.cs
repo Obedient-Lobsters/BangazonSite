@@ -21,8 +21,9 @@ namespace BangazonTests
 		}
 
 		[Theory]
+        [InlineData("/Products")]
 		[InlineData("/Products/Details/1")]
-		public async Task Get_EndpointsReturnSuccessAndCorrectContentType(string url)
+        public async Task Get_EndpointsReturnSuccessAndCorrectContentType(string url)
 		{
 			// Arrange
 			var client = _factory.CreateClient();
