@@ -35,6 +35,12 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">View Cart</a></li>
                 </ul>
                 <partial name="_LoginPartial" />
+                <form asp-controller="Products" asp-action="Index">
+                    <p>
+                        Title: <input type="text" name="SearchString">
+                        <input type="submit" value="P" />
+                    </p>
+                </form>
             </div>
         </div>
     </nav>
