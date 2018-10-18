@@ -21,9 +21,14 @@
                 </th>
                 @foreach (var product in item.Products.Take(3))
                 {
-                    <tr>
-                <td>@product.Title</td><td>$@product.Price</td>
-                    </tr>
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@product.ProductId">
+                        @product.Title
+                    </a>
+                </td>
+                <td>$@product.Price</td>
+            </tr>
                 }
             </tr>
         }

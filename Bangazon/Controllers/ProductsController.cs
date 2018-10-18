@@ -59,14 +59,24 @@ namespace Bangazon.Controllers
             return View(productType);
         }
 
+        		// This Index() method is currently being used by the ProductDetails view as a redirect when the "Add To Order" button is clicked.
+		// Once order functionality has been built and the Home page has been merged, this method and its view will be obsolete and can be deprecated
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var bangazonContext = _context.Product.Include(p => p.ProductType).Include(p => p.User);
-            return View(await bangazonContext.ToListAsync());
+            var applicationDbContext = _context.Product.Include(p => p.ProductType);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Products/Details/5
+		// Author: Elliot Huck
+		/* Description: 
+		 * Whenever a link with a product name is clicked, the details page shows more info on the product.
+		 * It also queries the database to see how many are still available for sale and displays an 'Add to Order' button that will eventually
+		 * allow a user to add the product to an order.
+		 * If there are no more remaining, the 'Add' button should be disabled.
+		 * Also, the 'Add' button should only function for registered users.
+		*/ 
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -76,21 +86,28 @@ namespace Bangazon.Controllers
 
             var product = await _context.Product
                 .Include(p => p.ProductType)
-                .Include(p => p.User)
                 .FirstOrDefaultAsync(m => m.ProductId == id);
             if (product == null)
             {
                 return NotFound();
             }
 
+			// Gets the number of intersections of this product on the OrderProduct table, showing how many times this product has been added to an order
+			int numOrdered = _context.OrderProduct.Where(op => op.ProductId == product.ProductId).Count();
+
+			// Decreases the quantity of the product available by the number that has already been ordered
+			product.Quantity -= numOrdered;
+
             return View(product);
         }
 
-        // GET: Products/Create
+		// These Create() methods are commented out because they were built by scaffolding, but aren't being implemented yet.
+		// I'm leaving them in here because they may be useful for someone working on a different ticket in the future --Elliot
+		/*
+		// GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["ProductTypeId"] = new SelectList(_context.Set<ProductType>(), "ProductTypeId", "Label");
-            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id");
+            ViewData["ProductTypeId"] = new SelectList(_context.ProductType, "ProductTypeId", "Label");
             return View();
         }
 
@@ -99,7 +116,7 @@ namespace Bangazon.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,DateCreated,Description,Title,Price,Quantity,City,UserId,ProductTypeId")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductId,DateCreated,Description,Title,Price,Quantity,City,ProductTypeId")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -107,13 +124,16 @@ namespace Bangazon.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProductTypeId"] = new SelectList(_context.Set<ProductType>(), "ProductTypeId", "Label", product.ProductTypeId);
-            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", product.UserId);
+            ViewData["ProductTypeId"] = new SelectList(_context.ProductType, "ProductTypeId", "Label", product.ProductTypeId);
             return View(product);
         }
+		*/
 
-        // GET: Products/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+		// These Edit() methods are commented out because they were built by scaffolding, but aren't being implemented yet.
+		// I'm leaving them in here because they may be useful for someone working on a different ticket in the future --Elliot
+		/*
+		// GET: Products/Edit/5
+		public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -125,8 +145,7 @@ namespace Bangazon.Controllers
             {
                 return NotFound();
             }
-            ViewData["ProductTypeId"] = new SelectList(_context.Set<ProductType>(), "ProductTypeId", "Label", product.ProductTypeId);
-            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", product.UserId);
+            ViewData["ProductTypeId"] = new SelectList(_context.ProductType, "ProductTypeId", "Label", product.ProductTypeId);
             return View(product);
         }
 
@@ -135,7 +154,7 @@ namespace Bangazon.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,DateCreated,Description,Title,Price,Quantity,City,UserId,ProductTypeId")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductId,DateCreated,Description,Title,Price,Quantity,City,ProductTypeId")] Product product)
         {
             if (id != product.ProductId)
             {
@@ -162,13 +181,16 @@ namespace Bangazon.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProductTypeId"] = new SelectList(_context.Set<ProductType>(), "ProductTypeId", "Label", product.ProductTypeId);
-            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", product.UserId);
+            ViewData["ProductTypeId"] = new SelectList(_context.ProductType, "ProductTypeId", "Label", product.ProductTypeId);
             return View(product);
         }
+		*/
 
-        // GET: Products/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+		// These Delete() methods are commented out because they were built by scaffolding, but aren't being implemented yet.
+		// I'm leaving them in here because they may be useful for someone working on a different ticket in the future --Elliot
+		/*
+		// GET: Products/Delete/5
+		public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -177,7 +199,6 @@ namespace Bangazon.Controllers
 
             var product = await _context.Product
                 .Include(p => p.ProductType)
-                .Include(p => p.User)
                 .FirstOrDefaultAsync(m => m.ProductId == id);
             if (product == null)
             {
@@ -197,10 +218,12 @@ namespace Bangazon.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+		*/
 
-        private bool ProductExists(int id)
+		private bool ProductExists(int id)
         {
             return _context.Product.Any(e => e.ProductId == id);
         }
+		
     }
 }
