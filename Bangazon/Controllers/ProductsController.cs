@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Bangazon.Data;
 using Bangazon.Models;
+using Bangazon.Data;
 
 namespace Bangazon.Controllers
 {
@@ -19,7 +19,47 @@ namespace Bangazon.Controllers
             _context = context;
         }
 
-		// This Index() method is currently being used by the ProductDetails view as a redirect when the "Add To Order" button is clicked.
+        public async Task<IActionResult> Types()
+        {
+            var model = new ProductTypesViewModel();
+
+            // Build list of Product instances for display in view
+            // LINQ is awesome
+            model.GroupedProducts = await (
+                from t in _context.ProductType
+                join p in _context.Product
+                on t.ProductTypeId equals p.ProductTypeId
+                group new { t, p } by new { t.ProductTypeId, t.Label } into grouped
+                select new GroupedProducts
+                {
+                    TypeId = grouped.Key.ProductTypeId,
+                    TypeName = grouped.Key.Label,
+                    ProductCount = grouped.Count() == 0 ? 100 : grouped.Select(x => x.p.ProductId).Count(),
+                    Products = grouped.Select(x => x.p).Take(3)
+                }).ToListAsync();
+
+            return View(model);
+        }
+
+        // GET: ProductTypes/Type/5
+        public async Task<IActionResult> TypeDetail(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var productType = await _context.ProductType
+                .FirstOrDefaultAsync(m => m.ProductTypeId == id);
+            if (productType == null)
+            {
+                return NotFound();
+            }
+
+            return View(productType);
+        }
+
+        		// This Index() method is currently being used by the ProductDetails view as a redirect when the "Add To Order" button is clicked.
 		// Once order functionality has been built and the Home page has been merged, this method and its view will be obsolete and can be deprecated
         // GET: Products
         public async Task<IActionResult> Index()

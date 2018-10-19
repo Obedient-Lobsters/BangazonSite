@@ -1,0 +1,36 @@
+﻿@*Author: William Kimball*@
+@*Purpose: build a view model for product type index*@
+@model Bangazon.Models.ProductTypesViewModel
+
+@{
+    ViewData["Title"] = "Product Types";
+}
+
+<h2>Product Catagories</h2>
+
+<table class="table">
+
+    <tbody>
+        @foreach (var item in Model.GroupedProducts)
+        {
+            <tr>
+                <th>
+                    <a asp-action="TypeDetail" asp-route-id="@item.TypeId">
+                        <h4>@item.TypeName (@item.ProductCount)</h4>
+                    </a>
+                </th>
+                @foreach (var product in item.Products.Take(3))
+                {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@product.ProductId">
+                        @product.Title
+                    </a>
+                </td>
+                <td>$@product.Price</td>
+            </tr>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
