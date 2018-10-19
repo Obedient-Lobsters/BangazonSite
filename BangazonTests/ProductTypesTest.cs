@@ -9,15 +9,15 @@ namespace BangazonTests
 {
     // Author: William Kimball
     // Description: Tests whether a product types page returns the correct content
-    public class ProductDetailTest : IClassFixture<WebApplicationFactory<Bangazon.Startup>>
+    public class ProductTypeTest : IClassFixture<WebApplicationFactory<Bangazon.Startup>>
     {
         private readonly WebApplicationFactory<Bangazon.Startup> _factory;
-        public ProductDetailTest(WebApplicationFactory<Bangazon.Startup> factory)
+        public ProductTypeTest(WebApplicationFactory<Bangazon.Startup> factory)
         {
             _factory = factory;
         }
         [Theory]
-        [InlineData("/Products/Details/1")]
+        [InlineData("/Products/types")]
         public async Task Get_EndpointsReturnSuccessAndCorrectContentType(string url)
         {
             // Arrange

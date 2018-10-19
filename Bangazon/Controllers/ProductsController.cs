@@ -34,7 +34,7 @@ namespace Bangazon.Controllers
                 {
                     TypeId = grouped.Key.ProductTypeId,
                     TypeName = grouped.Key.Label,
-                    ProductCount = grouped.Select(x => x.p.ProductId).Count(),
+                    ProductCount = grouped.Count() == 0 ? 100 : grouped.Select(x => x.p.ProductId).Count(),
                     Products = grouped.Select(x => x.p).Take(3)
                 }).ToListAsync();
 
