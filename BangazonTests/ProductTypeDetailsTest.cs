@@ -1,5 +1,5 @@
 ﻿//Author: Aaron Miller      
-//Purpose: Unit Testing of GET ProductTypes
+//Purpose: Unit Testing of GET ProductTypes Details
 
 using Microsoft.AspNetCore.Mvc.Testing;
 using System;
@@ -10,11 +10,11 @@ using Xunit;
 
 namespace BangazonTests
 {
-    public class ProductTypeTest : IClassFixture<WebApplicationFactory<Bangazon.Startup>>
+    public class ProductTypeDetailsTest : IClassFixture<WebApplicationFactory<Bangazon.Startup>>
     {
         private readonly WebApplicationFactory<Bangazon.Startup> _factory;
 
-        public ProductTypeTest(WebApplicationFactory<Bangazon.Startup> factory)
+        public ProductTypeDetailsTest(WebApplicationFactory<Bangazon.Startup> factory)
         {
             _factory = factory;
         }
