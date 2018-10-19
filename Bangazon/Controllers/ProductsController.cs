@@ -71,20 +71,38 @@ namespace Bangazon.Controllers
 		[Authorize]
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> AddToOrder(Product product)
+		public async Task<IActionResult> AddToOrder(int id, Product product)
 		{
-			ApplicationUser currentUser = await GetCurrentUserAsync();
-
-			Order activeOrder = await _context.Order.Where(o => (o.UserId == currentUser.Id) && (o.PaymentTypeId == null)).FirstOrDefaultAsync();
-
 			if (ModelState.IsValid)
 			{
-				_context.Add(product);
-				await _context.SaveChangesAsync();
-				return RedirectToAction(nameof(Index));
+				ApplicationUser currentUser = await GetCurrentUserAsync();
+
+				Order activeOrder = await _context.Order.Where(o => (o.UserId == currentUser.Id) && (o.PaymentTypeId == null)).FirstOrDefaultAsync();
+
+				if (activeOrder != null)
+				{
+					OrderProduct newOrderedProduct = new OrderProduct()
+					{
+						OrderId = activeOrder.OrderId,
+						ProductId = product.ProductId
+					};
+
+					_context.Add(newOrderedProduct);
+					await _context.SaveChangesAsync();
+					return RedirectToAction(nameof(Index));
+				}
+				return View(product);
 			}
-			ViewData["ProductTypeId"] = new SelectList(_context.ProductType, "ProductTypeId", "Label", product.ProductTypeId);
 			return View(product);
+
+			//if (ModelState.IsValid)
+			//{
+			//	_context.Add(product);
+			//	await _context.SaveChangesAsync();
+			//	return RedirectToAction(nameof(Index));
+			//}
+			//ViewData["ProductTypeId"] = new SelectList(_context.ProductType, "ProductTypeId", "Label", product.ProductTypeId);
+			//return View(product);
 		}
 
 		// These Create() methods are commented out because they were built by scaffolding, but aren't being implemented yet.
