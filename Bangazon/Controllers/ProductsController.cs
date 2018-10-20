@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bangazon.Data;
 using Bangazon.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace Bangazon.Controllers
 {
@@ -14,18 +16,42 @@ namespace Bangazon.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public ProductsController(ApplicationDbContext context)
+        public ProductsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-		// This Index() method is currently being used by the ProductDetails view as a redirect when the "Add To Order" button is clicked.
-		// Once order functionality has been built and the Home page has been merged, this method and its view will be obsolete and can be deprecated
-        // GET: Products
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
+        // This Index() method is currently being used by the ProductDetails view as a redirect when the "Add To Order" button is clicked.
+        // Once order functionality has been built and the Home page has been merged, this method and its view will be obsolete and can be deprecated
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Product.Include(p => p.ProductType);
-            return View(await applicationDbContext.ToListAsync());
+            var products = _context.Product.Include(p => p.ProductType);
+
+            return View(await products.ToListAsync());
+        }
+
+        //Author: Shu Sajid
+        //Purpose: Overloading index method. HttpPost is required because search field on view is
+        // a form. Conditional statment is used if user uses se
+        // GET: Products
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Index(string searchString, bool notUsed)
+        {
+            var products = _context.Product.Include(p => p.ProductType);
+
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var searchProducts = products.Where(s => s.Title.Contains(searchString));
+                return View(await searchProducts.ToListAsync());
+            }
+            return View(await products.ToListAsync());
         }
 
         // GET: Products/Details/5
