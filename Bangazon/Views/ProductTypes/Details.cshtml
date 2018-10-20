@@ -1,0 +1,53 @@
+﻿@*Author: Aaron Miller
+  Purpose: This view will filter the needed data from the ProductTypes Models will called by ProductTypes Controller *@
+@model Bangazon.Models.ProductViewModels.ProductTypeDetailViewModel
+
+@{
+    ViewData["Title"] = "Product Detail";
+}
+
+<div>
+    <h2 class="top-buffer">@Model.ProductTypes.Label</h2>
+    <hr />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Price
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Products" asp-action="Detail" asp-route-id="@product.ProductId">
+                            @Html.DisplayFor(modelItem => product.Title)
+                        </a>
+                    </td>
+                    <td>
+                        @product.Quantity
+                    </td>
+                    <td>
+                        @Html.DisplayFor(i => product.Price)
+                    </td>
+                    <td>
+                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@*<div>
+    <a asp-action="Index">Back to List</a>
+</div>*@

@@ -1,3 +1,6 @@
+// Author: Aaron Miller
+//Purpose: This Model specifies the data of the table ProductType
+
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
