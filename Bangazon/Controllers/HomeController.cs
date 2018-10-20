@@ -5,29 +5,34 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Bangazon.Models;
+using Bangazon.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bangazon.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        //Author: Shu Sajid 
+        //Purpose: This controller is needed for the home page to view latest 
+        //twenty products
+        
+        //This variable is used to make the connection to database
+        private ApplicationDbContext _context;
+
+        public HomeController(ApplicationDbContext context)
         {
-            return View();
+            _context = context;
+        }
+        //This method gets the top latest creaded objections and passes it into view
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Product
+                .Include(product=>product.ProductType)
+                .OrderByDescending(product => product.DateCreated)
+                .Take(20)
+                .ToListAsync());
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
 
         public IActionResult Privacy()
         {
