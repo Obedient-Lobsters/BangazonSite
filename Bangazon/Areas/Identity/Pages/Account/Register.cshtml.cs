@@ -87,7 +87,7 @@ namespace Bangazon.Areas.Identity.Pages.Account {
                         values : new { userId = user.Id, code = code },
                         protocol : Request.Scheme);
 
-                    await _signInManager.SignInAsync (user, isPersistent : false);
+                    await _signInManager.SignInAsync (user, isPersistent : true);
                     return LocalRedirect (returnUrl);
                 }
                 foreach (var error in result.Errors) {
